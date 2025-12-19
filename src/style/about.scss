@@ -1,268 +1,392 @@
 .about-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  //grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: calc(100vh - 188px);
-  padding: 0 0em;
+  min-height: calc(100vh - 200px);
+  padding: 20px 0;
   box-sizing: border-box;
-  overflow: hidden;
 
-  /* --- LADO IZQUIERDO (IMAGEN) --- */
+  /* --- LADO IZQUIERDO / ENCABEZADO --- */
   .left-wrapper {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    // background-attachment: fixed; //Imagen fija
-    height: 90%;
     width: 80%;
-    margin: auto;
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    color: $offwhite;
-    font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
-    letter-spacing: 2px;
-    font-size: 2em;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+    position: relative; // línea absoluta
 
-    .left-silk {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(32, 123, 136, 0.25);
-      //background-color: rgba(32, 123, 136, 0.5); /* negro al 50% */
-      //color: $teal;
+    .linea-estilizada {
       position: absolute;
-      inset: 0; /* ocupa todo el contenedor padre */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
+      height: 2px;
+      border: none;
+      background-color: $pizarra;
+      z-index: 0; // Se queda al fondo
+      margin: 0;
     }
 
-    h1 {
-      position: relative; /* para que quede encima del overlay */
+    .left-silk {
+      position: relative; // Para que el z-index funcione
       z-index: 1;
-      margin: 0; /* Corrección: elimina margen superior por defecto */
-
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: transparent;
+
+      h1 {
+        color: $dark-teal;
+        font-family: 'Optima', sans-serif;
+        font-weight: 600;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin: 0;
+        padding: 0 20px; // Espacio para que la línea no toque las letras
+        background-color: #f6f6f6; // USA AQUÍ EL COLOR EXACTO DE TU FONDO
+        z-index: 2; // Por encima de la línea
+      }
     }
   }
 
-  /*
-  $teal: #26bfd4;
-$dark-teal: #207b88;
-$charcoal: #42454a;
-$offwhite: #f6f6f6;
-$blue: #008dff;
-$warning: #922a2a;
-$grey: #8a8a8a;
-  */
-
   /* --- LADO DERECHO (CONTENIDO) --- */
   .right-wrapper {
-    // padding: 2em;
     overflow-y: auto; /* Scroll interno para escritorio */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Contenido anclado arriba para evitar cortes */
+    justify-content: center; /* Contenido anclado arriba para evitar cortes */
     align-items: center; /* Centrado horizontal del contenido */
-    padding: 2em 0;
+    //padding: 2em 0;
+    width: 80%;
+
+    //About me
+    .intro {
+      background-color: rgba($turquesa, 0.1); // Fondo muy sutil de tu color turquesa
+      border: 1px solid rgba($turquesa, 0.3); // Borde suave
+      border-radius: 15px; // Bordes redondeados
+      padding: 25px 30px; // Más padding para que respire
+      margin: 30px auto; // Margen para separarlo del contenido, centrado
+      max-width: 700px; // Para que no se estire demasiado en pantallas grandes
+      //position: relative; // Necesario para la "cola" de la burbuja
+      text-align: center;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: $pizarra; //  pizarra para contraste
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); // Sombra suave
+    }
 
     //formacion academica
     .education-section {
       margin-top: 2rem;
+      width: 100%;
 
-      .subtitle {
+      .education-subtitle {
         text-align: left;
         margin-bottom: 1rem;
-        color: $dark-teal; // Usando tu variable
-        border-bottom: 2px solid $teal; // Línea sutil
+        color: $turquesa;
+        border-bottom: 1px solid $dark-teal; // Línea sutil
         padding-bottom: 0.5rem;
         font-size: 1.5rem;
       }
     }
-
-    .studies-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra elegante
-
-      // Cabecera de la tabla
-      th {
-        background-color: $dark-teal; // Color oscuro para cabecera
-        color: $offwhite; // Texto blanco
-        padding: 1rem;
-        text-align: left;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        font-weight: 600;
-      }
-
-      // Celdas del cuerpo
-      td {
-        padding: 1rem;
-        border-bottom: 1px solid #ddd;
-        background-color: $offwhite; // Fondo blanco roto
-        font-size: 0.95rem;
-
-        // Oculta las etiquetas de datos por defecto (para escritorio)
-        &[data-label] {
-          display: table-cell;
-        }
-      }
-
-      // Estilo para el enlace (Certificados y FP)
-      .study-link {
-        color: $blue; // Usando tu variable azul para enlaces
-        font-weight: 600;
-        text-decoration: none;
-        transition: color 0.2s ease-in-out;
-
-        &:hover {
-          color: $teal; // Cambio de color al pasar el ratón
-          text-decoration: underline;
-        }
-      }
-
-      // Efecto hover en las filas
-      tbody tr:hover {
-        background-color: #f0f0f0;
-      }
-
-      /* Media Query para tabla responsive (sobrescribe la tabla en móviles/tabletas) */
-      @media (max-width: 1024px) {
-        thead {
-          display: none; // Oculta la cabecera original
-        }
-        tr {
-          display: block; // Cada fila se convierte en un bloque
-          margin-bottom: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-        }
-
-        /* Uso de Flexbox para alinear etiqueta (::before) y valor */
-        td {
-          display: flex; /* La celda es el contenedor flex */
-          text-align: left; /* Alineación del valor a la izquierda */
-          border: none;
-          position: relative;
-          padding: 0.8rem 1rem; /* Padding uniforme */
-
-          justify-content: flex-start;
-          align-items: flex-start; /* Alineación vertical */
-
-          &::before {
-            content: attr(data-label) ':';
-            position: static;
-            min-width: 90px; /* Ancho fijo para la etiqueta */
-            padding-right: 10px;
-            white-space: nowrap;
-            font-weight: 700;
-            color: $charcoal;
-            text-align: left;
-            align-self: flex-start; /* Asegura alineación vertical con el inicio del texto */
-          }
-
-          /* Estilo para el contenido real de la celda */
-          & > * {
-            flex: 1; /* El valor ocupa el espacio restante */
-            text-align: left;
-          }
-        }
-      }
-    }
-
-    //
-    // scroll derecho
-    &::-webkit-scrollbar {
-      width: 4px; // Fina
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $teal; // Color $teal (#26bfd4)
-      border-radius: 4px; // Bordes redondeados
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: transparent; // Fondo transparente
-    }
-
-    // css sobre mi
-    .about-me {
+    /* --- TARJETA : STACK TECNOLÓGICO --- */
+    .tech-stack-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       width: 80%;
-      max-width: 700px; /* Límite para que no se vea gigante en monitores grandes */
-      padding: 0 1em; /* Padding horizontal interno */
-      padding-top: 3px;
+      padding: 20px;
+      margin: 20px auto;
+      background-color: rgba($pizarra, 0.1);
+      border-radius: 15px;
+      border: 1px solid rgba($pizarra, 0.2);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 
-      font-family: 'Oswald', sans-serif;
-      line-height: 1.6;
-      color: #333;
-
-      .title {
-        color: $dark-teal;
+      .stack-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
+
+        .stack-label {
+          color: $cobre;
+          font-family: 'Optima', sans-serif;
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: 0.9rem;
+          letter-spacing: 2px;
+          margin-bottom: 15px;
+          border-bottom: 1px solid rgba($cobre, 0.3);
+          width: 100%;
+          padding-bottom: 5px;
+        }
+
+        .stack-content {
+          .tech-tags {
+            color: $blue;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            display: block;
+          }
+        }
+      }
+    } // CIERRE PRIMERA TARJETA
+
+    /* --- TARJETA : FORMACIÓN  --- */
+    .education-stack-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 80%;
+      padding: 20px;
+      margin: 20px auto;
+      background-color: rgba($pizarra, 0.1);
+      border-radius: 15px;
+      border: 1px solid rgba($pizarra, 0.2);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+
+      .stack-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .stack-label {
+          color: $cobre;
+          font-family: 'Optima', sans-serif;
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+          letter-spacing: 2px;
+          margin-bottom: 12px;
+          border-bottom: 1px solid rgba($cobre, 0.3);
+          width: 100%;
+          padding-bottom: 5px;
+        }
+
+        .stack-content {
+          .study-link {
+            color: $blue;
+            font-size: 0.85rem;
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+              color: $teal;
+            }
+          }
+          .tech-tags {
+            color: $charcoal;
+            font-size: 0.85rem;
+          }
+        }
+      }
+
+      // Reutilizamos las mismas Media Queries para que se vea bien en móvil
+      @media (max-width: 1024px) {
+        .education-stack-card {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .education-stack-card {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+
+    // Responsive: en móvil quitamos la estructura de columnas
+    @media (max-width: 768px) {
+      .tech-stack-card .stack-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+
+        .stack-label {
+          min-width: auto;
+        }
+      }
+    }
+
+    // .studies-table {
+    //   width: 100%;
+    //   border-collapse: collapse;
+    //   margin-top: 1rem;
+    //   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra elegante
+
+    //   // Cabecera de la tabla
+    //   th {
+    //     background-color: $dark-teal; // Color oscuro para cabecera
+    //     color: $offwhite; // Texto blanco
+    //     padding: 1rem;
+    //     text-align: left;
+    //     font-size: 0.9rem;
+    //     letter-spacing: 1px;
+    //     font-weight: 600;
+    //   }
+
+    //   // Celdas del cuerpo
+    //   td {
+    //     padding: 1rem;
+    //     border-bottom: 1px solid #ddd;
+    //     background-color: $offwhite; // Fondo blanco roto
+    //     font-size: 0.95rem;
+
+    //     // Oculta las etiquetas de datos por defecto (para escritorio)
+    //     &[data-label] {
+    //       display: table-cell;
+    //     }
+    //   }
+
+    //   // Estilo para el enlace (Certificados y FP)
+    //   .study-link {
+    //     color: $blue; // Usando tu variable azul para enlaces
+    //     font-weight: 600;
+    //     text-decoration: none;
+    //     transition: color 0.2s ease-in-out;
+
+    //     &:hover {
+    //       color: $teal; // Cambio de color al pasar el ratón
+    //       text-decoration: underline;
+    //     }
+    //   }
+
+    //   // Efecto hover en las filas
+    //   tbody tr:hover {
+    //     background-color: #f0f0f0;
+    //   }
+
+    /* Media Query para tabla responsive (sobrescribe la tabla en móviles/tabletas) */
+    @media (max-width: 1024px) {
+      thead {
+        display: none; // Oculta la cabecera original
+      }
+      tr {
+        display: block; // Cada fila se convierte en un bloque
         margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
       }
 
-      .intro {
-        text-align: center;
-        font-size: 1.2rem;
-        opacity: 0.9;
-      }
+      /* Uso de Flexbox para alinear etiqueta (::before) y valor */
+      td {
+        display: flex; /* La celda es el contenedor flex */
+        text-align: left; /* Alineación del valor a la izquierda */
+        border: none;
+        position: relative;
+        padding: 0.8rem 1rem; /* Padding uniforme */
 
-      .subtitle {
-        color: $teal;
-        margin-top: 2rem;
-      }
+        justify-content: flex-start;
+        align-items: flex-start; /* Alineación del valor vertical */
 
-      .strengths {
-        list-style: none;
-        padding: 0;
-      }
+        &::before {
+          content: attr(data-label) ':';
+          position: static;
+          min-width: 90px; /* Ancho fijo para la etiqueta */
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: 700;
+          color: $charcoal;
+          text-align: left;
+          align-self: flex-start; /* Asegura alineación vertical con el inicio del texto */
+        }
 
-      .strengths li {
+        /* Estilo para el contenido real de la celda */
+        & > * {
+          flex: 1; /* El valor ocupa el espacio restante */
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  //
+  // scroll derecho
+  &::-webkit-scrollbar {
+    width: 4px; // Fina
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $teal; // Color $teal (#26bfd4)
+    border-radius: 4px; // Bordes redondeados
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent; // Fondo transparente
+  }
+
+  // css sobre mi
+  .about-me {
+    width: 100%;
+    max-width: 1000px; /* Límite para que no se vea gigante en monitores grandes */
+    padding: 0 1em; /* Padding horizontal interno */
+    padding-top: 3px;
+
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.6;
+    color: #333;
+
+    .title {
+      color: $dark-teal;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .intro {
+      text-align: center;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .subtitle {
+      color: $teal;
+      margin-top: 2rem;
+    }
+
+    .strengths {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+
+      li {
         background: lightgray;
         font-weight: 550;
         letter-spacing: 2px;
-        margin: 0.5rem 0;
+        margin: 0;
         padding: 0.5rem 1rem;
         border-radius: 6px;
       }
+    }
 
-      .stack-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-      }
+    .stack-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
 
-      .stack-table th {
-        background: #009688;
-        color: white;
-        padding: 0.8rem;
-        text-align: left;
-      }
+    .stack-table th {
+      background: #009688;
+      color: white;
+      padding: 0.8rem;
+      text-align: left;
+    }
 
-      .stack-table td {
-        padding: 0.8rem;
-        background: #e0f7fa;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
-          Geneva, Verdana, sans-serif;
-        font-weight: 550;
-      }
+    .stack-table td {
+      padding: 0.8rem;
+      background: #e0f7fa;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
+        Geneva, Verdana, sans-serif;
+      font-weight: 550;
+    }
 
-      .closing {
-        text-align: center;
-        font-weight: bold;
-        margin-top: 2rem;
-        color: #009688;
-      }
+    .closing {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 2rem;
+      color: #009688;
     }
   }
 
@@ -270,9 +394,6 @@ $grey: #8a8a8a;
   /* === MEDIA QUERY PARA MÓVIL Y TABLET (1024px o menos) que APILA === */
   /* -------------------------------------------------------------------------- */
   @media (max-width: 1024px) {
-    /* Ajuste de grid a 1 columna (apilamiento) */
-    grid-template-columns: 1fr;
-
     /* Altura automática para permitir scroll en toda la página */
     height: auto;
 
@@ -291,6 +412,7 @@ $grey: #8a8a8a;
 
     /* LADO DERECHO (CONTENIDO) */
     .right-wrapper {
+      width: 100%;
       padding: 0;
       overflow-y: visible; /* Elimina scroll interno */
 
