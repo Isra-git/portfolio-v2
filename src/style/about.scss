@@ -55,29 +55,34 @@
     flex-direction: column;
     justify-content: center; /* Contenido anclado arriba para evitar cortes */
     align-items: center; /* Centrado horizontal del contenido */
-    //padding: 2em 0;
     width: 80%;
 
     //About me
-    .intro {
-      background-color: rgba($turquesa, 0.1); // Fondo muy sutil de tu color turquesa
-      border: 1px solid rgba($turquesa, 0.3); // Borde suave
-      border-radius: 15px; // Bordes redondeados
-      padding: 25px 30px; // Más padding para que respire
-      margin: 30px auto; // Margen para separarlo del contenido, centrado
-      max-width: 700px; // Para que no se estire demasiado en pantallas grandes
-      //position: relative; // Necesario para la "cola" de la burbuja
-      text-align: center;
-      font-size: 1.25rem;
-      line-height: 1.8;
-      color: $pizarra; //  pizarra para contraste
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); // Sombra suave
+    .about-me {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+
+      .intro {
+        background-color: rgba($turquesa, 0.1); // Fondo muy sutil de tu color turquesa
+        border: 1px solid rgba($turquesa, 0.3); // Borde suave
+        border-radius: 15px; // Bordes redondeados
+        padding: 25px 30px; // Más padding para que respire
+        margin: 30px auto; // Margen para separarlo del contenido, centrado
+        max-width: 700px; // Para que no se estire demasiado en pantallas grandes
+        text-align: center;
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: $pizarra; // pizarra para contraste
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); // Sombra suave
+      }
     }
 
     //formacion academica
     .education-section {
       margin-top: 2rem;
       width: 100%;
+      max-width: 1000px; // Mismo ancho que about-me
 
       .education-subtitle {
         text-align: left;
@@ -88,12 +93,15 @@
         font-size: 1.5rem;
       }
     }
+
     /* --- TARJETA : STACK TECNOLÓGICO --- */
-    .tech-stack-card {
+    /* --- TARJETA : FORMACIÓN --- */
+    .tech-stack-card,
+    .education-stack-card {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      width: 80%;
+      width: 100%; // Ahora ocupa el total de los 1000px de la sección
       padding: 20px;
       margin: 20px auto;
       background-color: rgba($pizarra, 0.1);
@@ -122,50 +130,133 @@
         }
 
         .stack-content {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+
+          /* CLASE BASE PARA EL ICONO (MÁSCARA) */
+          .tech-icon {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-position: center;
+            mask-position: center;
+            transition: transform 0.2s ease;
+
+            &:hover {
+              transform: scale(1.15);
+            }
+
+            /* --- RUTAS ABSOLUTAS / --- */
+            &.css {
+              background-color: #663399;
+              -webkit-mask-image: url('/static/assets/techs/css.svg');
+              mask-image: url('/static/assets/techs/css.svg');
+            }
+            &.html5 {
+              background-color: #e34f26;
+              -webkit-mask-image: url('/static/assets/techs/html5.svg');
+              mask-image: url('/static/assets/techs/html5.svg');
+            }
+            &.javascript {
+              background-color: #f7df1e;
+              -webkit-mask-image: url('/static/assets/techs/javascript.svg');
+              mask-image: url('/static/assets/techs/javascript.svg');
+            }
+            &.react {
+              background-color: #61dafb;
+              -webkit-mask-image: url('/static/assets/techs/react.svg');
+              mask-image: url('/static/assets/techs/react.svg');
+            }
+            &.sass {
+              background-color: #cc6699;
+              -webkit-mask-image: url('/static/assets/techs/sass.svg');
+              mask-image: url('/static/assets/techs/sass.svg');
+            }
+            &.tailwind {
+              background-color: #06b6d4;
+              -webkit-mask-image: url('/static/assets/techs/tailwind.svg');
+              mask-image: url('/static/assets/techs/tailwind.svg');
+            }
+
+            &.python,
+            &.Python {
+              background-color: #3776ab;
+              -webkit-mask-image: url('/static/assets/techs/python.svg');
+              mask-image: url('/static/assets/techs/python.svg');
+            }
+            &.fastapi {
+              background-color: #009688;
+              -webkit-mask-image: url('/static/assets/techs/fastapi.svg');
+              mask-image: url('/static/assets/techs/fastapi.svg');
+            }
+            &.flask {
+              background-color: #3babc3;
+              -webkit-mask-image: url('/static/assets/techs/flask.svg');
+              mask-image: url('/static/assets/techs/flask.svg');
+            }
+            &.postman {
+              background-color: #ff6c37;
+              -webkit-mask-image: url('/static/assets/techs/postman.svg');
+              mask-image: url('/static/assets/techs/postman.svg');
+            }
+
+            &.mysql {
+              background-color: #4479a1;
+              -webkit-mask-image: url('/static/assets/techs/mysql.svg');
+              mask-image: url('/static/assets/techs/mysql.svg');
+            }
+            &.postgresql {
+              background-color: #4169e1;
+              -webkit-mask-image: url('/static/assets/techs/postgresql.svg');
+              mask-image: url('/static/assets/techs/postgresql.svg');
+            }
+            &.mongodb {
+              background-color: #47a248;
+              -webkit-mask-image: url('/static/assets/techs/mongodb.svg');
+              mask-image: url('/static/assets/techs/mongodb.svg');
+            }
+
+            &.git {
+              background-color: #f05032;
+              -webkit-mask-image: url('/static/assets/techs/git.svg');
+              mask-image: url('/static/assets/techs/git.svg');
+            }
+            &.github {
+              background-color: #181717;
+              -webkit-mask-image: url('/static/assets/techs/github.svg');
+              mask-image: url('/static/assets/techs/github.svg');
+            }
+            &.linux {
+              background-color: #fcc624;
+              -webkit-mask-image: url('/static/assets/techs/linux.svg');
+              mask-image: url('/static/assets/techs/linux.svg');
+            }
+            &.hardware {
+              background-color: #556db3;
+              -webkit-mask-image: url('/static/assets/techs/hardware.svg');
+              mask-image: url('/static/assets/techs/hardware.svg');
+            }
+            &.uml {
+              background-color: #fabd14;
+              -webkit-mask-image: url('/static/assets/techs/uml.svg');
+              mask-image: url('/static/assets/techs/uml.svg');
+            }
+          }
+
           .tech-tags {
             color: $blue;
             font-size: 0.85rem;
             line-height: 1.4;
             display: block;
+            width: 100%;
           }
-        }
-      }
-    } // CIERRE PRIMERA TARJETA
 
-    /* --- TARJETA : FORMACIÓN  --- */
-    .education-stack-card {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      width: 80%;
-      padding: 20px;
-      margin: 20px auto;
-      background-color: rgba($pizarra, 0.1);
-      border-radius: 15px;
-      border: 1px solid rgba($pizarra, 0.2);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-
-      .stack-column {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-
-        .stack-label {
-          color: $cobre;
-          font-family: 'Optima', sans-serif;
-          font-weight: 600;
-          text-transform: uppercase;
-          font-size: 0.85rem;
-          letter-spacing: 2px;
-          margin-bottom: 12px;
-          border-bottom: 1px solid rgba($cobre, 0.3);
-          width: 100%;
-          padding-bottom: 5px;
-        }
-
-        .stack-content {
           .study-link {
             color: $blue;
             font-size: 0.85rem;
@@ -175,175 +266,30 @@
               color: $teal;
             }
           }
-          .tech-tags {
-            color: $charcoal;
-            font-size: 0.85rem;
-          }
-        }
-      }
-
-      // Reutilizamos las mismas Media Queries para que se vea bien en móvil
-      @media (max-width: 1024px) {
-        .education-stack-card {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 600px) {
-        .education-stack-card {
-          grid-template-columns: 1fr;
         }
       }
     }
 
     // Responsive: en móvil quitamos la estructura de columnas
     @media (max-width: 768px) {
-      .tech-stack-card .stack-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-
-        .stack-label {
-          min-width: auto;
-        }
-      }
-    }
-
-    // .studies-table {
-    //   width: 100%;
-    //   border-collapse: collapse;
-    //   margin-top: 1rem;
-    //   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra elegante
-
-    //   // Cabecera de la tabla
-    //   th {
-    //     background-color: $dark-teal; // Color oscuro para cabecera
-    //     color: $offwhite; // Texto blanco
-    //     padding: 1rem;
-    //     text-align: left;
-    //     font-size: 0.9rem;
-    //     letter-spacing: 1px;
-    //     font-weight: 600;
-    //   }
-
-    //   // Celdas del cuerpo
-    //   td {
-    //     padding: 1rem;
-    //     border-bottom: 1px solid #ddd;
-    //     background-color: $offwhite; // Fondo blanco roto
-    //     font-size: 0.95rem;
-
-    //     // Oculta las etiquetas de datos por defecto (para escritorio)
-    //     &[data-label] {
-    //       display: table-cell;
-    //     }
-    //   }
-
-    //   // Estilo para el enlace (Certificados y FP)
-    //   .study-link {
-    //     color: $blue; // Usando tu variable azul para enlaces
-    //     font-weight: 600;
-    //     text-decoration: none;
-    //     transition: color 0.2s ease-in-out;
-
-    //     &:hover {
-    //       color: $teal; // Cambio de color al pasar el ratón
-    //       text-decoration: underline;
-    //     }
-    //   }
-
-    //   // Efecto hover en las filas
-    //   tbody tr:hover {
-    //     background-color: #f0f0f0;
-    //   }
-
-    /* Media Query para tabla responsive (sobrescribe la tabla en móviles/tabletas) */
-    @media (max-width: 1024px) {
-      thead {
-        display: none; // Oculta la cabecera original
-      }
-      tr {
-        display: block; // Cada fila se convierte en un bloque
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-      }
-
-      /* Uso de Flexbox para alinear etiqueta (::before) y valor */
-      td {
-        display: flex; /* La celda es el contenedor flex */
-        text-align: left; /* Alineación del valor a la izquierda */
-        border: none;
-        position: relative;
-        padding: 0.8rem 1rem; /* Padding uniforme */
-
-        justify-content: flex-start;
-        align-items: flex-start; /* Alineación del valor vertical */
-
-        &::before {
-          content: attr(data-label) ':';
-          position: static;
-          min-width: 90px; /* Ancho fijo para la etiqueta */
-          padding-right: 10px;
-          white-space: nowrap;
-          font-weight: 700;
-          color: $charcoal;
-          text-align: left;
-          align-self: flex-start; /* Asegura alineación vertical con el inicio del texto */
-        }
-
-        /* Estilo para el contenido real de la celda */
-        & > * {
-          flex: 1; /* El valor ocupa el espacio restante */
-          text-align: left;
-        }
+      .tech-stack-card,
+      .education-stack-card {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   }
 
-  //
   // scroll derecho
   &::-webkit-scrollbar {
     width: 4px; // Fina
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: $teal; // Color $teal (#26bfd4)
     border-radius: 4px; // Bordes redondeados
   }
 
-  &::-webkit-scrollbar-track {
-    background-color: transparent; // Fondo transparente
-  }
-
   // css sobre mi
   .about-me {
-    width: 100%;
-    max-width: 1000px; /* Límite para que no se vea gigante en monitores grandes */
-    padding: 0 1em; /* Padding horizontal interno */
-    padding-top: 3px;
-
-    font-family: 'Oswald', sans-serif;
-    line-height: 1.6;
-    color: #333;
-
-    .title {
-      color: $dark-teal;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .intro {
-      text-align: center;
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-
-    .subtitle {
-      color: $teal;
-      margin-top: 2rem;
-    }
-
     .strengths {
       list-style: none;
       padding: 0;
@@ -355,38 +301,9 @@
         background: lightgray;
         font-weight: 550;
         letter-spacing: 2px;
-        margin: 0;
         padding: 0.5rem 1rem;
         border-radius: 6px;
       }
-    }
-
-    .stack-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-
-    .stack-table th {
-      background: #009688;
-      color: white;
-      padding: 0.8rem;
-      text-align: left;
-    }
-
-    .stack-table td {
-      padding: 0.8rem;
-      background: #e0f7fa;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
-        Geneva, Verdana, sans-serif;
-      font-weight: 550;
-    }
-
-    .closing {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 2rem;
-      color: #009688;
     }
   }
 
@@ -394,34 +311,21 @@
   /* === MEDIA QUERY PARA MÓVIL Y TABLET (1024px o menos) que APILA === */
   /* -------------------------------------------------------------------------- */
   @media (max-width: 1024px) {
-    /* Altura automática para permitir scroll en toda la página */
     height: auto;
-
-    /* Configuración de flujo y padding para la vista vertical */
     padding: 0;
     overflow-y: visible;
 
-    /* LADO IZQUIERDO (IMAGEN) */
     .left-wrapper {
-      width: 100%; /* Ocupa todo el ancho en móvil */
-      height: 300px; /* Altura fija para la imagen */
-      margin: 0; /* Quitamos el margin: auto */
-      font-size: 1.8em;
-      border-radius: 0; /* Eliminar borde para que ocupe todo el ancho */
+      width: 100%;
+      height: 300px;
     }
 
-    /* LADO DERECHO (CONTENIDO) */
     .right-wrapper {
       width: 100%;
-      padding: 0;
-      overflow-y: visible; /* Elimina scroll interno */
-
       .about-me {
-        width: 90%; /* Damos más espacio al contenido */
-        padding: 2em 0;
-        max-width: 100%;
+        width: 90%;
         margin: auto;
       }
     }
-  } /* Cierre de la Media Query */
-} /* Cierre final del .about-wrapper */
+  }
+}

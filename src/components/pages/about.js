@@ -4,7 +4,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
-import aboutImg from '../../../static/assets/images/about/about.jpg';
+// Importamos los logos del stack
+//import { techIcons } from '../../helpers/icons';
 
 export default function About() {
   return (
@@ -32,16 +33,11 @@ export default function About() {
             <div className="stack-column">
               <div className="stack-label">Frontend</div>
               <div className="stack-content">
-                <span className="tech-tags">React</span>
-                <span className="tech-icon">icono</span>
-                <span className="tech-tags">JavaScript</span>
-                <span className="tech-icon">icono</span>
-                <span className="tech-tags">Tailwind</span>
-                <span className="tech-icon">icono</span>
-                <span className="tech-tags">CSS</span>
-                <span className="tech-icon">icono</span>
-                <span className="tech-tags">HTML</span>
-                <span className="tech-icon">icono</span>
+                <span className="tech-icon react">{/* <img src={techIcons.react} /> */}</span>
+                <span className="tech-icon javascript"></span>
+                <span className="tech-icon tailwind"></span>
+                <span className="tech-icon css">{/* <img src={techIcons.css} /> */}</span>
+                <span className="tech-icon html5"></span>
               </div>
             </div>
 
@@ -49,7 +45,11 @@ export default function About() {
             <div className="stack-column">
               <div className="stack-label">Backend</div>
               <div className="stack-content">
-                <span className="tech-tags">Python, Javascript, FastAPI, Node.js</span>
+                <span className="tech-icon Python"></span>
+                <span className="tech-icon flask"></span>
+                <span className="tech-icon fastapi"></span>
+                <span className="tech-icon node"></span>
+                <span className="tech-icon postman"></span>
               </div>
             </div>
 
@@ -57,7 +57,10 @@ export default function About() {
             <div className="stack-column">
               <div className="stack-label">Databases</div>
               <div className="stack-content">
-                <span className="tech-tags">MySQL, PostgreSQL, MongoDB</span>
+                <span className="tech-icon mysql"> MySQL</span>
+                <span className="tech-icon postgresql"></span>
+                <span className="tech-icon mongodb"></span>
+                <span className="tech-icon"></span>
               </div>
             </div>
 
@@ -65,7 +68,9 @@ export default function About() {
             <div className="stack-column">
               <div className="stack-label">DevOps / Otros</div>
               <div className="stack-content">
-                <span className="tech-tags">Git, Linux, Docker, AWS</span>
+                <span className="tech-icon git"></span>
+                <span className="tech-icon linux"></span>
+                <span className="tech-icon Docker"></span>
               </div>
             </div>
           </div>
@@ -78,7 +83,7 @@ export default function About() {
           <div className="education-stack-card">
             {/* Columna Certificado */}
             <div className="stack-column">
-              <div className="stack-label">Certificado</div>
+              <div className="stack-label">Certificaciones</div>
               <div className="stack-content">
                 <a
                   href="https://bottega.edu/full-stack-development-certificate/"
