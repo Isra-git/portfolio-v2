@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import SilkTitle from '../navigation/silk-title.js';
 
 // Importamos FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,12 +17,7 @@ import { techIcons } from '../../helpers/icons';
 export default function About() {
   return (
     <div className="about-wrapper">
-      <div className="left-wrapper">
-        <hr className="linea-estilizada" />
-        <div className="left-silk">
-          <h1>About Me</h1>
-        </div>
-      </div>
+      <SilkTitle title="Sobre Mi" />
       <div className="right-wrapper">
         <section className="about-me">
           <p className="intro">

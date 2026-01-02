@@ -1,0 +1,45 @@
+$pizarra: #333; // Asegúrate de que estas variables existan
+$dark-teal: #004d4d;
+
+.left-wrapper {
+  width: 100%; // Cambiado a 100% para que la línea cruce toda la sección
+  max-width: 1200px; // O el ancho máximo de tu diseño
+  height: 30px;
+  display: flex;
+  justify-content: center; // Centra el contenido horizontalmente
+  align-items: center; // Centra el contenido verticalmente
+  margin: 0 auto 20px auto; // Centra el wrapper en la página
+  position: relative;
+
+  .linea-estilizada {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border: none;
+    background-color: $pizarra;
+    z-index: 0;
+    margin: 0;
+    top: 50%; // Asegura que la línea esté justo en el medio
+    transform: translateY(-50%);
+  }
+
+  .left-silk {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      color: $dark-teal;
+      font-family: 'Optima', sans-serif;
+      font-weight: 600;
+      font-size: 1.3em;
+      letter-spacing: 2px;
+      margin: 0;
+      padding: 0 25px; // Espacio alrededor del texto
+      background-color: #f6f6f6; // Debe coincidir con el fondo exacto
+      z-index: 2;
+    }
+  }
+}

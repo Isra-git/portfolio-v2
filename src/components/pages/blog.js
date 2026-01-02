@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BlogItem from '../blog/blog-item';
 import BlogModal from '../modals/blog-modal';
+import SilkTitle from '../navigation/silk-title.js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faCirclePlus, faEraser } from '@fortawesome/free-solid-svg-icons';
@@ -164,6 +165,7 @@ class Blog extends Component {
 
     return (
       <div className="blog-container">
+        <SilkTitle title="Entradas del Blog" />
         <BlogModal
           handleModalClose={this.handleModalClose}
           modalIsOpen={this.state.blogModalIsOpen}

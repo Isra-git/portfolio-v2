@@ -1,137 +1,150 @@
-.contact-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  //grid-gap: 20px;
-  width: 100%;
-  height: calc(100vh - 188px);
-  padding: 0 0em;
-  box-sizing: border-box;
-  overflow: hidden;
+.left-wrapper {
+  width: 80%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative; // línea absoluta
 
-  .contact-left-wrapper {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 80%;
-    height: 90%;
-    margin: auto;
-    //margin-left: 30px;
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    color: $offwhite;
-    font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
-    letter-spacing: 2px;
-    font-size: 2em;
+  .linea-estilizada {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border: none;
+    background-color: $pizarra;
+    z-index: 0; // Se queda al fondo
+    margin: 0;
+  }
+
+  .left-silk {
+    position: relative; // Para que el z-index funcione
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .contact-left-silk {
-      width: 100%;
-      height: 100%;
-      //background-color: rgba(32, 123, 136, 0.6); /* negro al 50% */
-      //color: $teal;
-      position: absolute;
-      inset: 0; /* ocupa todo el contenedor padre */
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
     h1 {
-      position: relative; /* para que quede encima del overlay */
-      z-index: 2;
-
-      background-color: transparent;
+      color: $dark-teal;
+      font-family: 'Optima', sans-serif;
+      font-weight: 600;
+      font-size: 1.3em;
+      letter-spacing: 2px;
+      margin: 0;
+      padding: 0 20px; // Espacio para que la línea no toque las letras
+      background-color: #f6f6f6; // USA AQUÍ EL COLOR EXACTO DE TU FONDO
+      z-index: 2; // Por encima de la línea
     }
   }
+}
+// contact, empieza aqui
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto; // centramos la imagen
+  position: relative; //aseguramos el centrado
+  min-height: calc(100vh - 200px);
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: 20px;
 
-  .contact-right-wrapper {
-    display: flex;
-    flex-direction: column; //era row
-
-    justify-content: center; //era start
-    //margin-left: 50px;
-    align-items: center;
-    width: 100%; //80
-    //margin: 25px;
-  }
-
-  .contact-section {
-    width: 80%;
-    max-width: 500px;
+  .contact-card {
+    width: 60%;
+    max-width: 800px;
+    padding: 60px 40px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 1.5em;
-  }
+    align-items: center;
+    box-sizing: border-box;
 
-  .contact-info {
-    display: flex;
-    flex-direction: row;
-    gap: 35px;
-    justify-content: start;
-    align-items: flex-start;
-    padding: 1em;
-  }
+    /* --- GLASSMORPHISM --- */
+    background: rgba($turquesa, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba($turquesa, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
-  .contact-icon {
-    font-size: 2em;
-    color: $dark-teal;
-  }
-  .contact-text {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: #333333;
-  }
-  .contact-text a {
-    color: #333333;
-    text-decoration: none;
-    cursor: pointer;
-  }
+    .contact-card-header {
+      margin-bottom: 50px;
 
-  .contact-text a:visited,
-  .contact-text a:hover,
-  .contact-text a:active {
-    color: #3cb371;
-  }
-
-  // Estilos para responsive
-  @media (max-width: 1024px) {
-    /* 1. Cambiamos a disposición de 1 columna (lado izquierdo arriba, lado derecho abajo) */
-    grid-template-columns: 1fr;
-
-    /* 2. Dejamos que la altura sea dictada por el contenido (auto), eliminando la altura fija */
-    height: auto;
-
-    /* 3. Ajustamos el padding lateral */
-    padding: 0;
-
-    /* LADO IZQUIERDO (IMAGEN) */
-    .contact-left-wrapper {
-      width: 90%; /* La imagen  centrada */
-      height: 300px; /* Le damos una altura fija para que se vea bien en la parte superior */
-      margin: 20px auto 0; /* Un poco de margen superior e inferior, centrado horizontal */
-      font-size: 1.5em;
+      h1 {
+        color: #ffffff;
+        font-family: 'Optima', sans-serif;
+        font-size: 3rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
     }
 
-    /* LADO DERECHO  */
-    .contact-right-wrapper {
-      padding: 20px 0;
+    .contact-card-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      width: 100%;
 
-      .contact-section {
-        width: 90%; /* Damos más espacio al contenido  */
-        max-width: 100%;
-        padding: 0;
+      .contact-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+
+        /* EFECTO HOVER */
+        &:hover {
+          transform: translateY(-5px);
+          background: rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+          color: $dark-teal; // variable
+          font-size: 1.5rem;
+          width: 30px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .contact-text {
+          color: white;
+          font-size: 1.1rem;
+          font-weight: 500;
+          font-family: 'Optima', sans-serif;
+
+          a {
+            color: white;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-wrapper {
+    .contact-card {
+      width: 95%;
+      padding: 40px 20px;
+
+      .contact-card-header h1 {
+        font-size: 2rem;
       }
 
-      /* Reducimos el tamaño de la fuente para mejor visualización */
-      .contact-icon {
-        font-size: 1.5em;
-      }
-      .contact-text {
-        font-size: 1.2em;
+      .contact-card-content {
+        grid-template-columns: 1fr;
       }
     }
   }

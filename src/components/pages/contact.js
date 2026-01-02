@@ -1,64 +1,75 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import contactImg from '../../../static/assets/images/contact/contact.jpg';
+import SilkTitle from '../navigation/silk-title.js';
+
+import contactImg from '../../../static/assets/images/contact/contact2.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 export default function About() {
   return (
-    <div className="contact-wrapper">
+    <Fragment>
+      <SilkTitle title="Contacta Conmigo" />
       <div
-        className="contact-left-wrapper"
+        className="contact-wrapper"
         style={{
           backgroundImage: `url(${contactImg})`,
         }}
       >
-        <div className="contact-left-silk">
-          {/* <h1>Contact</h1> */}
-          <h1>israDev</h1>
-        </div>
-      </div>
-      <div className="contact-right-wrapper">
-        <section className="contact-section">
-          <div className="contact-info">
-            <div className="contact-icon">
-              <FontAwesomeIcon icon={faPhone} />
-            </div>
-            <div className="contact-text">943-555-555</div>
+        <div className="contact-card">
+          <div className="contact-card-header">
+            <h1>israDev</h1>
           </div>
-          <div className="contact-info">
-            <div className="contact-icon">
-              <FontAwesomeIcon icon={faEnvelope} />
+
+          <div className="contact-card-content">
+            <div className="contact-info">
+              <div className="contact-icon">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </div>
+              <div className="contact-text">
+                <a href="mailto:villar_80@hotmail.com">villar_80@hotmail.com</a>
+              </div>
             </div>
-            <div className="contact-text">
-              <a href="mailto:villar_80@hotmail.com">villar_80@hotmail.com</a>
+
+            <div className="contact-info">
+              <div className="contact-icon">
+                <FontAwesomeIcon icon={faGithub} />
+              </div>
+              <div className="contact-text">
+                <a href="https://github.com/Isra-git" target="new">
+                  israDev
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="contact-info">
-            <div className="contact-icon">
-              <FontAwesomeIcon icon={faGithub} />
-            </div>
-            <div className="contact-text">
-              <a>Github (proximamente)</a>
-            </div>
-          </div>
-          <div className="contact-info">
+
+            {/* para cuando lo añada -_>
+
+           <div className="contact-info">
             <div className="contact-icon">
               <FontAwesomeIcon icon={faLinkedin} />
             </div>
             <div className="contact-text">
               <a>Linkedin (proximamente)</a>
             </div>
-          </div>
-          <div className="contact-info">
-            <div className="contact-icon">
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
+          </div> */}
+
+            <div className="contact-info">
+              <div className="contact-icon">
+                <FontAwesomeIcon icon={faPhone} />
+              </div>
+              <div className="contact-text">605 72 29 48</div>
             </div>
-            <div className="contact-text">Irun -Guipuzcoa- 20300</div>
+
+            <div className="contact-info">
+              <div className="contact-icon">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+              </div>
+              <div className="contact-text">Irun -Guipuzcoa- 20300</div>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
