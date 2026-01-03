@@ -1,0 +1,34 @@
+RESUMEN DE CAMBIOS: PORTFOLIO V2 (NETLIFY DEPLOY)
+1. CORRECCIÓN DE ARCHIVOS Y RUTAS (Case Sensitivity)
+
+Se renombró el archivo de estilos de 'Silk-title.scss' a 'silk-title.scss' (minúsculas).
+
+Se corrigieron los 'import' en JavaScript para que coincidieran exactamente con el nombre del archivo en el sistema de archivos de Linux (que usa Netlify), evitando errores de "Module not found".
+
+2. REESTRUCTURACIÓN DE ESTILOS (SCSS)
+
+Se centralizó la importación de estilos: se eliminaron los 'import' de archivos .scss dentro de los componentes .js.
+
+Se movieron todos los archivos .scss al archivo maestro 'src/style/main.scss'.
+
+Se añadieron los '@import' de variables y mixins dentro de 'silk-title.scss' para que el archivo fuera autónomo durante la compilación.
+
+3. OPTIMIZACIÓN DEL PUNTO DE ENTRADA (Bootstrap.js)
+
+Se cambió el orden de carga: ahora el 'import' del CSS principal ('main.scss') se realiza ANTES de importar los componentes de React ('App'). Esto asegura que el motor de estilos esté inicializado antes de que React intente renderizar la interfaz.
+
+4. ACTUALIZACIÓN DEL MOTOR DE COMPILACIÓN (Webpack Prod Config)
+
+Cambio de Minificador: Se sustituyó 'UglifyJsPlugin' por 'TerserPlugin' (instalando 'terser-webpack-plugin@4').
+
+Configuración de Terser: Se activó la opción 'inline: false' dentro de las 'terserOptions'. Este cambio fue el que eliminó definitivamente el error "Cannot access 'n' before initialization".
+
+Desactivación de SourceMaps: Se establecieron todas las opciones de 'sourceMap' y 'devtool' en 'false' para evitar conflictos de lectura en el código minificado de producción.
+
+Estabilización de Caché: Se cambiaron los nombres de salida de '[hash]' a '[chunkhash]' para asegurar que el navegador cargue siempre la versión más reciente sin conflictos de caché.
+
+5. PROCEDIMIENTO DE DESPLIEGUE SEGURO (Netlify)
+
+Limpieza de Git: Se eliminó la carpeta 'dist/' del repositorio de Git ('git rm -r --cached dist') y se añadió al '.gitignore' para que Netlify genere el sitio desde cero en cada build.
+
+Deploy Nuclear: Uso de la opción 'Clear cache and deploy site' en Netlify para forzar la reinstalación de todas las dependencias y borrar archivos temporales corruptos de versiones anteriores.
