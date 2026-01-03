@@ -1,7 +1,5 @@
-$pizarra: #333; // Asegúrar de que estas variables existan
-$dark-teal: #004d4d;
-// @import './variables.scss';
-// @import './mixins.scss';
+@import './variables.scss';
+@import './mixins.scss';
 
 .left-wrapper {
   width: 100%; // Cambiado a 100% para que la línea cruce toda la sección
