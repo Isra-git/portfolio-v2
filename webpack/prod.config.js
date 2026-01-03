@@ -5,7 +5,8 @@ const webpackCommon = require('./common.config');
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// CAMBIO 1: Sustituimos UglifyJs por Terser para evitar el error de inicialización 'n'
+const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -14,8 +15,7 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 module.exports = webpackMerge(webpackCommon, {
   bail: true,
 
-  // CAMBIO 1: 'devtool' a false (sin comillas).
-  // Esto elimina la generación de mapas que causaba el error de variable "n".
+  // CAMBIO 2: 'devtool' totalmente en false (booleano)
   devtool: false,
 
   mode: 'production',
@@ -23,11 +23,8 @@ module.exports = webpackMerge(webpackCommon, {
   output: {
     path: path.resolve(__dirname, '../dist'),
 
-    // CAMBIO 2: Usamos [chunkhash] en lugar de [hash].
-    // Es más estable para producción y evita conflictos de nombres.
+    // CAMBIO 3: Usamos [chunkhash] para mayor estabilidad en los nombres de archivo
     filename: '[name]-[chunkhash].js',
-
-    sourceMapFilename: '[name]-[chunkhash].map',
     chunkFilename: '[id]-[chunkhash].js',
     publicPath: '/',
   },
@@ -41,8 +38,7 @@ module.exports = webpackMerge(webpackCommon, {
           use: [
             {
               loader: 'css-loader',
-              // CAMBIO 3: sourceMap a false en todos los loaders de estilo.
-              // Evita que Webpack intente inyectar lógica de rastreo en el CSS.
+              // CAMBIO 4: Desactivamos sourceMap en todos los loaders para evitar errores de Runtime
               options: {
                 sourceMap: false,
                 importLoaders: 2,
@@ -102,25 +98,23 @@ module.exports = webpackMerge(webpackCommon, {
       },
     }),
 
-    // CAMBIO 4: CSS con [chunkhash] para coherencia con el JS.
+    // CAMBIO 5: CSS extraído con chunkhash para evitar colisiones
     new ExtractTextPlugin('[name]-[chunkhash].css'),
 
-    new UglifyJsPlugin({
-      uglifyOptions: {
+    // CAMBIO 6: Configuramos Terser con 'inline: false'
+    // Esta opción es la que arregla específicamente el error "Cannot access 'n' before initialization"
+    new TerserPlugin({
+      terserOptions: {
         compress: {
-          ie8: true,
-          warnings: false,
+          inline: false,
+          drop_console: true,
         },
-        mangle: {
-          ie8: true,
-        },
+        mangle: true,
         output: {
           comments: false,
-          ie8: true,
         },
       },
-      // CAMBIO 5: sourceMap a false explícito en el minificador.
-      // UglifyJs solía fallar al intentar mapear el código moderno de Axios.
+      extractComments: false,
       sourceMap: false,
     }),
 
