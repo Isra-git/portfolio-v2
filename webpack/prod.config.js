@@ -14,12 +14,20 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 module.exports = webpackMerge(webpackCommon, {
   bail: true,
 
-  devtool: false, // <--- CORREGIDO: Sin comillas para desactivarlo totalmente
+  // CAMBIO 1: 'devtool' a false (sin comillas).
+  // Esto elimina la generación de mapas que causaba el error de variable "n".
+  devtool: false,
+
   mode: 'production',
+
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name]-[hash].min.js',
-    sourceMapFilename: '[name]-[hash].map',
+
+    // CAMBIO 2: Usamos [chunkhash] en lugar de [hash].
+    // Es más estable para producción y evita conflictos de nombres.
+    filename: '[name]-[chunkhash].js',
+
+    sourceMapFilename: '[name]-[chunkhash].map',
     chunkFilename: '[id]-[chunkhash].js',
     publicPath: '/',
   },
@@ -33,8 +41,10 @@ module.exports = webpackMerge(webpackCommon, {
           use: [
             {
               loader: 'css-loader',
+              // CAMBIO 3: sourceMap a false en todos los loaders de estilo.
+              // Evita que Webpack intente inyectar lógica de rastreo en el CSS.
               options: {
-                sourceMap: false, // <--- CAMBIADO a false para evitar errores de inicialización
+                sourceMap: false,
                 importLoaders: 2,
               },
             },
@@ -44,14 +54,14 @@ module.exports = webpackMerge(webpackCommon, {
                 config: {
                   path: path.resolve(__dirname, 'postcss.config.js'),
                 },
-                sourceMap: false, // <--- CAMBIADO a false
+                sourceMap: false,
               },
             },
             {
               loader: 'sass-loader',
               options: {
                 outputStyle: 'expanded',
-                sourceMap: false, // <--- CAMBIADO a false
+                sourceMap: false,
                 sourceMapContents: false,
               },
             },
@@ -91,7 +101,10 @@ module.exports = webpackMerge(webpackCommon, {
         NODE_ENV: '"production"',
       },
     }),
-    new ExtractTextPlugin('[name]-[chunkhash].min.css'),
+
+    // CAMBIO 4: CSS con [chunkhash] para coherencia con el JS.
+    new ExtractTextPlugin('[name]-[chunkhash].css'),
+
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
@@ -106,8 +119,11 @@ module.exports = webpackMerge(webpackCommon, {
           ie8: true,
         },
       },
-      sourceMap: false, // <--- CONFIRMADO en false
+      // CAMBIO 5: sourceMap a false explícito en el minificador.
+      // UglifyJs solía fallar al intentar mapear el código moderno de Axios.
+      sourceMap: false,
     }),
+
     new LoaderOptionsPlugin({
       options: {
         context: '/',
