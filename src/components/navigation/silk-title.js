@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../style/silk-title.scss';
 
 const SilkTitle = ({ title }) => {
   return (
